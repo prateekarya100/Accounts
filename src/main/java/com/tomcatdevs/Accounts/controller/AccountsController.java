@@ -26,7 +26,7 @@ public class AccountsController {
         iAccountsService.createAccount(customerDto);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(new ResponseDto(HttpStatus.CREATED.toString(),"account created"));
+                .body(new ResponseDto(HttpStatus.CREATED.toString(),"account created successfuly"));
     }
 
     @GetMapping(value = "/fetch")
