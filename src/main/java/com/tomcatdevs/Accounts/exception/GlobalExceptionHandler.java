@@ -30,7 +30,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         HashMap<String, String> validationErrorResponse = new HashMap<>();
         List<ObjectError> errorList = ex.getBindingResult().getAllErrors();
         errorList.forEach(error -> {
-            String errorField=error.toString();
+            String errorField= String.valueOf((FieldError)error);
             String errorMessage = error.getDefaultMessage();
             validationErrorResponse.put(errorField, errorMessage);
         });
