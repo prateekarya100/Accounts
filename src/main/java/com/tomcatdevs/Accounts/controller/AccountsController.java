@@ -14,10 +14,10 @@ import static org.springframework.http.MediaType.*;
 
 @RestController
 @RequestMapping(path = "/api",produces = "application/json")
-//@AllArgsConstructor
+@AllArgsConstructor
 public class AccountsController {
 
-    @Autowired
+//    @Autowired
     private IAccountsService iAccountsService;
 
     @PostMapping(value = "/create")
