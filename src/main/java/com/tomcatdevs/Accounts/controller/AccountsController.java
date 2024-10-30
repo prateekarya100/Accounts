@@ -41,7 +41,7 @@ public class AccountsController {
         boolean isUpdated = iAccountsService.updateCustomerAccountDetails(customerDto);
         if(isUpdated){
             return ResponseEntity.status(HttpStatus.ACCEPTED)
-                    .body(new ResponseDto(HttpStatus.ACCEPTED.toString(),"account updated successfully"));
+                    .body(new ResponseDto(HttpStatus.ACCEPTED.toString(),"account updated successfully yaar"));
         }else{
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
                     .body(new ResponseDto(HttpStatus.EXPECTATION_FAILED.toString(),"customer account details updation failed"));
