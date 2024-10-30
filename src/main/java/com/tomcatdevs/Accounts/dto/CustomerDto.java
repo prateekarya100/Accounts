@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class CustomerDto {
 
     @NotEmpty(message = "name must not be null or empty")
-    @Size(min = 3,max = 8, message = "name must be minimum 3 and maximum of 8 characters")
+    @Size(min = 3, message = "name must be minimum 3 and maximum of 8 characters")
     private String name;
 
     @NotEmpty(message = "email address must not be null or empty")
@@ -20,7 +20,7 @@ public class CustomerDto {
     private String email;
 
     @Pattern(regexp = "$|[0-9]{10}",message = "mobile number must be of 10 digits number")
-    @Size(min = 10,message = "mobile number must be of 10 digit")
+    @Size(min = 10,max = 10, message = "mobile number must be of 10 digit")
     private String mobileNumber;
 
    //nested mapping accountsDto details to customerDto
