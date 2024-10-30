@@ -4,18 +4,26 @@ import com.tomcatdevs.Accounts.dto.CustomerDto;
 import com.tomcatdevs.Accounts.dto.ResponseDto;
 import com.tomcatdevs.Accounts.service.IAccountsService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static org.springframework.http.MediaType.*;
+
 @RestController
-@RequestMapping(path = "/api",produces = MediaType.APPLICATION_JSON_VALUE)
-@AllArgsConstructor //comment @AllConstructor to create RUNTIME_ERROR
+@RequestMapping(path = "/api",produces = "application/json")
+//@AllArgsConstructor //comment @AllConstructor to create RUNTIME_ERROR
 public class AccountsController {
 
-//    @Autowired // NO NEED TO MENTION @AUTOWIRING ,IF USES CONSTRUCTOR AUTOWIRING
-    private IAccountsService iAccountsService;
+    // NO NEED TO MENTION @AUTOWIRING ,IF USES CONSTRUCTOR AUTOWIRING
+    @Autowired
+    private final IAccountsService iAccountsService;
+
+    public AccountsController(IAccountsService iAccountsService) {
+        this.iAccountsService = iAccountsService;
+    }
 
     @PostMapping(value = "/create")
     public ResponseEntity<ResponseDto> create(@RequestBody CustomerDto customerDto){
