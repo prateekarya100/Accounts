@@ -5,6 +5,7 @@ import com.tomcatdevs.Accounts.dto.ResponseDto;
 import com.tomcatdevs.Accounts.service.IAccountsService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,11 +16,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/api",produces = MediaType.APPLICATION_JSON_VALUE)
-//@AllArgsConstructor
+@AllArgsConstructor
 @Validated
 public class AccountsController {
 
-    @Autowired
+//    @Autowired
     private IAccountsService iAccountsService;
 
     @PostMapping(value = "/create")
