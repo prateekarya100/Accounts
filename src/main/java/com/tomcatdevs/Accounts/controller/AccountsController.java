@@ -14,16 +14,11 @@ import static org.springframework.http.MediaType.*;
 
 @RestController
 @RequestMapping(path = "/api",produces = "application/json")
-//@AllArgsConstructor //comment @AllConstructor to create RUNTIME_ERROR
+@AllArgsConstructor
 public class AccountsController {
 
-    // NO NEED TO MENTION @AUTOWIRING ,IF USES CONSTRUCTOR AUTOWIRING
-    @Autowired
+//    @Autowired
     private final IAccountsService iAccountsService;
-
-    public AccountsController(IAccountsService iAccountsService) {
-        this.iAccountsService = iAccountsService;
-    }
 
     @PostMapping(value = "/create")
     public ResponseEntity<ResponseDto> create(@RequestBody CustomerDto customerDto){
