@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Data @AllArgsConstructor @NoArgsConstructor
 public class AccountsDto {
     @Pattern(regexp = "$|[0-9]{10}",message = "bank account number must be of 10 digit")
+    @NotEmpty(message = "bank account number must not be null or empty")
     private Long accountNumber;
 
     @NotEmpty(message = "bank account type must not be null or empty")
