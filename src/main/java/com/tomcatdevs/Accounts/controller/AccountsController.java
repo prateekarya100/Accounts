@@ -14,11 +14,11 @@ import static org.springframework.http.MediaType.*;
 
 @RestController
 @RequestMapping(path = "/api",produces = "application/json")
-@AllArgsConstructor
+//@AllArgsConstructor
 public class AccountsController {
 
-//    @Autowired
-    private final IAccountsService iAccountsService;
+    @Autowired
+    private IAccountsService iAccountsService;
 
     @PostMapping(value = "/create")
     public ResponseEntity<ResponseDto> create(@RequestBody CustomerDto customerDto){
