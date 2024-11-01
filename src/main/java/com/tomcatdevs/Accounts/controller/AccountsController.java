@@ -1,8 +1,15 @@
 package com.tomcatdevs.Accounts.controller;
 
 import com.tomcatdevs.Accounts.dto.CustomerDto;
+import com.tomcatdevs.Accounts.dto.ErrorResponseDto;
 import com.tomcatdevs.Accounts.dto.ResponseDto;
 import com.tomcatdevs.Accounts.service.IAccountsService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -18,11 +25,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "/api",produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 @Validated
+@Tag(
+        name = "EazyBank Accounts Service",
+        description = "EazyBank Accounts microservices restful services documentation"
+)
 public class AccountsController {
 
 //    @Autowired
     private IAccountsService iAccountsService;
 
+    @Operation(
+            summary = "Create new bank account in eazybank",
+            description = "EazyBank Accounts microservices restful services documentation"
+    )
     @PostMapping(value = "/create")
     public ResponseEntity<ResponseDto> create(@Valid @RequestBody CustomerDto  customerDto){
         System.out.println(customerDto);
@@ -32,6 +47,10 @@ public class AccountsController {
                 .body(new ResponseDto(HttpStatus.CREATED.toString(),"account created successfuly"));
     }
 
+    @Operation(
+            summary = "fetch bank account details of existing customers from eazybank",
+            description = "EazyBank Accounts microservices restful services documentation"
+    )
     @GetMapping(value = "/fetch")
     public ResponseEntity<CustomerDto> fetch(@RequestParam
                                                  @Pattern(regexp = "$|[0-9]{10}",message = "number must be of 10 digit")
@@ -41,7 +60,23 @@ public class AccountsController {
                 .status(HttpStatus.OK)
                 .body(customerDto);
     }
-
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "202",
+                            description="HTTP Status ACCEPTED"
+                    ),
+                    @ApiResponse(
+                            responseCode = "417",
+                            description="HTTP Status EXPECTATION_FAILED",
+                            content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))
+                    )
+            }
+    )
+    @Operation(
+            summary = "update bank account detail of customer in eazybank",
+            description = "EazyBank Accounts microservices restful services documentation"
+    )
     @PutMapping(value = "/update")
     public ResponseEntity<ResponseDto> update(@Valid @RequestBody CustomerDto customerDto){
         boolean isUpdated = iAccountsService.updateCustomerAccountDetails(customerDto);
@@ -54,6 +89,25 @@ public class AccountsController {
         }
     }
 
+
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description="HTTP Status OK"
+                    ),
+                    @ApiResponse(
+                            responseCode = "417",
+                            description="HTTP Status EXPECTATION_FAILED",
+                            content = @Content(
+                                    schema = @Schema(implementation = ErrorResponseDto.class))
+                    )
+            }
+    )
+    @Operation(
+            summary = "delete bank account of customer from eazybank",
+            description = "EazyBank Accounts microservices restful services documentation"
+    )
     @DeleteMapping(value = "/delete")
     ResponseEntity<ResponseDto> delete(@RequestParam
                                        @Pattern(regexp = "$|[0-9]{10}",message = "number must be of 10 digit")
