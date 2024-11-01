@@ -61,7 +61,7 @@ public class AccountsController {
         boolean isDeleted=iAccountsService.deleteCustomerAccount(mobileNumber);
         if(isDeleted){
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseDto(HttpStatus.OK.toString(),"customer has been account deleted successfully"));
+                    .body(new ResponseDto(HttpStatus.OK.toString(),"customer account deleted successfully"));
         }else {
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
                     .body(new ResponseDto(HttpStatus.EXPECTATION_FAILED.toString(),"customer account deletion failed"));
